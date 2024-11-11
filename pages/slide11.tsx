@@ -6,15 +6,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Slide11: React.FC = () => {
   const [commandText, setCommandText] = useState('');
   const [showError, setShowError] = useState(false);
+  const [highlightAssertion, setHighlightAssertion] = useState(false);
   
   const command = '$ python structured_validation.py';
-  const errorOutput = `Traceback (most recent call last):
+  const errorStart = `Traceback (most recent call last):
   File "structured_validation.py", line 42, in <module>
     qa: QuestionAnswerNoEvil = client.chat.completions.create(
                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 pydantic.error_wrappers.ValidationError: 1 validation error for QuestionAnswerNoEvil
 answer
-  Assertion failed, The statement promotes sin and debauchery, which is objectionable.
+  `;
+
+  const assertionMessage = `Assertion failed, The statement promotes sin and debauchery, which is objectionable.`;
+
+  const errorEnd = `
 
 $ `;
 
@@ -30,6 +35,13 @@ $ `;
         // After command is typed, wait 1 second before showing error
         setTimeout(() => {
           setShowError(true);
+          // After error appears, wait 2 seconds before highlighting assertion
+          setTimeout(() => {
+            setHighlightAssertion(true);
+            setTimeout(() => {
+              setHighlightAssertion(false);
+            }, 3000);
+          }, 2000);
         }, 1000);
       }
     }, 100); // Slower typing speed for realistic feel
@@ -80,7 +92,16 @@ $ `;
                   animate={{ opacity: 1 }}
                   className="text-green-400 text-2xl whitespace-pre-wrap mt-4"
                 >
-                  {errorOutput}
+                  {errorStart}
+                  <motion.span
+                    animate={{
+                      color: highlightAssertion ? "#fbbf24" : "#4ade80" // warm yellow when highlighted
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {assertionMessage}
+                  </motion.span>
+                  {errorEnd}
                   <motion.span
                     className="inline-block w-3 h-6 bg-green-400 ml-1"
                     animate={{ opacity: [1, 0] }}

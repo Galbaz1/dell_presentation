@@ -148,18 +148,18 @@ const Slide3: React.FC = () => {
             <motion.div 
               className="w-20 h-20 rounded-full bg-amber-100 flex items-center justify-center mb-4 mx-auto"
               animate={{ 
-                rotate: hoveredBlock === 'stakeholder' ? [0, -360] : 0
+                rotate: hoveredBlock === 'stakeholder' ? [0, 360] : 0
               }}
               transition={{ duration: 2 }}
             >
-              <Rocket className="w-12 h-12 text-amber-600" />
+              <Brain className="w-12 h-12 text-amber-600" />
             </motion.div>
             <h2 className="text-2xl font-bold text-amber-900 text-center mb-4">Stakeholder Expectations</h2>
             <ul className="space-y-3">
               {['Media hype influence', 'Impressive POC demos', 'Market pressure', 'Competitive urgency'].map((item, i) => (
                 <motion.li
                   key={i}
-                  className="flex items-center text-amber-800"
+                  className="flex items-center text-lg text-amber-800"
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.2 }}

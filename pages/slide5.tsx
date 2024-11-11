@@ -310,7 +310,7 @@ const Slide5: React.FC = () => {
         <Link href="/slide4" className="bg-emerald-500 hover:bg-emerald-600 text-white p-2 rounded-full transition-colors">
           <ArrowLeft className="w-6 h-6" />
         </Link>
-        <Link href="/slide6" className="bg-emerald-500 hover:bg-emerald-600 text-white p-2 rounded-full transition-colors">
+        <Link href="/slide7" className="bg-emerald-500 hover:bg-emerald-600 text-white p-2 rounded-full transition-colors">
           <ArrowRight className="w-6 h-6" />
         </Link>
       </div>

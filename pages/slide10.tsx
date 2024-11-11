@@ -7,20 +7,24 @@ const Slide10: React.FC = () => {
   const [displayedText, setDisplayedText] = useState('');
   const scrollRef = useRef<HTMLPreElement>(null);
   const controls = useAnimation();
+  const [highlightValidator, setHighlightValidator] = useState(false);
   
   const fullText = "Adding Custom Validation\nBy adding a validator to the answer field, we can try to catch the issue and correct it.";
 
-  const codeString = `class QuestionAnswerNoEvil(BaseModel):
+  const codeStart = `class QuestionAnswerNoEvil(BaseModel):
     question: str
     answer: Annotated[
         str,
-        BeforeValidator(
+        BeforeValidator(`;
+
+  const validatorSection = `            
             llm_validator(
                 "don't say objectionable things", 
                 client=client, 
                 allow_override=True
-            )
-        ),
+            )`;
+
+  const codeEnd = `        ),
     ]`;
 
   useEffect(() => {
@@ -31,6 +35,13 @@ const Slide10: React.FC = () => {
         index++;
       } else {
         clearInterval(timer);
+        // Start validator highlight after text completion
+        setTimeout(() => {
+          setHighlightValidator(true);
+          setTimeout(() => {
+            setHighlightValidator(false);
+          }, 3000);
+        }, 2000);
       }
     }, 30);
 
@@ -90,7 +101,16 @@ const Slide10: React.FC = () => {
               animate={controls}
               className="font-mono text-2xl leading-relaxed whitespace-pre block"
             >
-              {codeString}
+              <span>{codeStart}</span>
+              <motion.span
+                animate={{
+                  color: highlightValidator ? "#4ade80" : "#E5E7EB"
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {validatorSection}
+              </motion.span>
+              <span>{codeEnd}</span>
             </motion.code>
           </pre>
         </div>
@@ -109,4 +129,4 @@ const Slide10: React.FC = () => {
   );
 };
 
-export default Slide10; 
+export default Slide10;
