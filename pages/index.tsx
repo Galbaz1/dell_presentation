@@ -8,8 +8,8 @@ const SpeakerSlide: React.FC = () => {
     <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-xl shadow-lg min-h-screen overflow-hidden relative">
       {/* Header */}
       <div className="mb-12 text-center">
-        <h1 className="text-4xl font-bold text-amber-900 mb-2">Journey to AI Engineering</h1>
-        <p className="text-lg text-amber-700">Fausto Albers</p>
+        <h1 className="text-4xl font-bold text-amber-900 mb-2">Fausto Albers</h1>
+        <p className="text-lg text-amber-700"></p>
       </div>
 
       {/* Journey Map */}

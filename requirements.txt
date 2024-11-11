@@ -1,0 +1,26 @@
+# Node.js Dependencies (package.json)
+
+# Core Dependencies
+next@14.2.17
+react@18.3.1
+react-dom@18.3.1
+gsap@3.12.5
+lucide-react@0.294.0
+
+# Development Dependencies
+typescript@5.6.3
+@types/node@20.17.6
+@types/react@18.3.12
+@types/react-dom@18.3.1
+tailwindcss@3.4.14
+autoprefixer@10.4.20
+postcss@8.4.48
+
+# Node.js Version
+node >= 16.0.0
+
+# Note: This project uses npm/yarn for package management.
+# Install dependencies using:
+# npm install
+# or
+# yarn install 
