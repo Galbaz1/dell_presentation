@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fallAndBounce {
+  0% {
+    transform: translateY(-100%) translateX(-50%);
+  }
+  70% {
+    transform: translateY(120%) translateX(-50%);
+  }
+  75% {
+    transform: translateY(110%) translateX(-50%);
+  }
+  80% {
+    transform: translateY(115%) translateX(-50%);
+  }
+  85% {
+    transform: translateY(108%) translateX(-50%);
+  }
+  90% {
+    transform: translateY(112%) translateX(-50%);
+  }
+  100% {
+    transform: translateY(0%) translateX(-50%);
+  }
+}
+
+@keyframes developerFall {
+  0%, 69% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(90deg);
+  }
+}
+
+.animate-fall-bounce {
+  animation: fallAndBounce 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-developer-fall {
+  animation: developerFall 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 2.1s;
+} 

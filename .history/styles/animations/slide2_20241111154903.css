@@ -1,0 +1,34 @@
+/* Add slide 2 specific animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in-scale {
+  opacity: 0;
+  animation: fadeInScale 0.5s ease-out forwards;
+  animation-play-state: running !important;
+}
+
+/* Add animation delays for each card */
+.fade-in-scale[style*="animation-delay: 0.2s"] {
+  animation-delay: 0.2s !important;
+}
+
+.fade-in-scale[style*="animation-delay: 0.4s"] {
+  animation-delay: 0.4s !important;
+}
+
+.fade-in-scale[style*="animation-delay: 0.6s"] {
+  animation-delay: 0.6s !important;
+}
+
+.fade-in-scale[style*="animation-delay: 0.8s"] {
+  animation-delay: 0.8s !important;
+} 

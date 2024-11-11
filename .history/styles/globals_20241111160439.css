@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fallAndBounce {
+  0% {
+    transform: translateY(-100%) translateX(-50%);
+  }
+  70% {
+    transform: translateY(100%) translateX(-50%);
+  }
+  75% {
+    transform: translateY(95%) translateX(-50%);
+  }
+  100% {
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+@keyframes developerFall {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  20% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(20%) rotate(90deg);
+  }
+}
+
+.animate-fall-bounce {
+  animation: fallAndBounce 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-developer-fall {
+  animation: developerFall 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 1.4s;
+} 
