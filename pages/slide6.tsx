@@ -98,7 +98,7 @@ const Slide6: React.FC = () => {
           
           {/* Concept text */}
           <div 
-            className="absolute inset-0 flex items-center justify-center text-white font-bold text-sm text-center"
+            className="absolute inset-0 flex items-center justify-center text-lg text-white font-bold text-center"
             style={{ pointerEvents: 'none' }}
           >
             {piece.concept}

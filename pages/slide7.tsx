@@ -144,43 +144,46 @@ const Slide7: React.FC = () => {
     <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-xl shadow-lg min-h-screen overflow-hidden relative">
       {/* Header */}
       <motion.div
-        className="mb-8 text-center"
+        className="mb-16"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-4xl font-bold text-indigo-900 mb-3">LLM Reliability Enhancement</h1>
-        <p className="text-xl text-indigo-700">Advanced Techniques for Consistent & Accurate Outputs</p>
+        <h1 className="text-4xl font-bold text-indigo-900 mb-3 text-center">The Prompt Layer</h1>
+        <p className="text-xl text-indigo-700 text-center">Programmatic prompt engineering</p>
       </motion.div>
 
-      {/* Streaming Text */}
-      <motion.div 
-        className="max-w-3xl mx-auto text-center mb-12 text-lg text-indigo-800"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <AnimatePresence mode='wait'>
-          <motion.span
-            key={displayedText}
-            initial={{ opacity: 0.5 }}
-            animate={{ opacity: 1 }}
-          >
-            {displayedText}
-          </motion.span>
-          {displayedText.length < fullText.length && (
+      {/* Streaming Text Container - Fixed height to prevent layout shifts */}
+      <div className="h-[120px] flex items-center justify-center mb-16">
+        <motion.div 
+          className="max-w-4xl mx-auto text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <AnimatePresence mode='wait'>
             <motion.span
-              className="inline-block w-0.5 h-5 bg-indigo-500 ml-1"
-              animate={{ opacity: [1, 0] }}
-              transition={{ duration: 0.5, repeat: Infinity }}
-            />
-          )}
-        </AnimatePresence>
-      </motion.div>
+              key={displayedText}
+              initial={{ opacity: 0.5 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-medium text-indigo-950"
+            >
+              {displayedText}
+            </motion.span>
+            {displayedText.length < fullText.length && (
+              <motion.span
+                className="inline-block w-1 h-8 bg-indigo-600 ml-1"
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+              />
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
 
       {/* Blocks Container */}
       <motion.div
-        className="max-w-[90%] mx-auto flex justify-between items-center gap-6 px-4 h-[60vh] my-20"
+        className="max-w-[90%] mx-auto flex justify-between items-center gap-6 px-4 h-[50vh]"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -231,15 +234,14 @@ const Slide7: React.FC = () => {
                 </motion.div>
 
                 <h3
-                  className="text-xl font-semibold mb-2"
+                  className="text-2xl font-semibold mb-2"
                   style={{ color: block.color.text }}
                 >
                   {block.title}
                 </h3>
                 
-                {/* Added description */}
                 <p
-                  className="text-sm"
+                  className="text-lg"
                   style={{ color: block.color.text }}
                 >
                   {block.description}

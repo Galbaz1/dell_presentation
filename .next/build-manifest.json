@@ -23,15 +23,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/slide6": [
+    "/slide11": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/slide6.js"
+      "static/chunks/pages/slide11.js"
     ],
-    "/slide8": [
+    "/slide12": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/slide8.js"
+      "static/chunks/pages/slide12.js"
+    ],
+    "/slide13": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/slide13.js"
     ]
   },
   "ampFirstPages": []

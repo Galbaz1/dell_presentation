@@ -122,7 +122,7 @@ const Slide3: React.FC = () => {
               {['Increased focus on core coding', 'Reduced project management', 'Enhanced autonomous work', 'Accelerated development'].map((item, i) => (
                 <motion.li
                   key={i}
-                  className="flex items-center text-amber-800"
+                  className="flex items-center text-lg text-amber-800"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: i * 0.2 }}
@@ -191,8 +191,8 @@ const Slide3: React.FC = () => {
               transition={{ delay: 2 }}
             >
               <h3 className="text-lg font-semibold text-red-800">Development Phase</h3>
-              <ul className="text-red-700 space-y-2">
-                {['Information loss', 'Overlooked details', 'Compressed processes'].map((item, i) => (
+              <ul className="text-lg text-red-700 space-y-2">
+                {['Information loss', 'Overlooked details', 'Technical debt'].map((item, i) => (
                   <motion.li
                     key={i}
                     initial={{ opacity: 0 }}
@@ -213,8 +213,8 @@ const Slide3: React.FC = () => {
               transition={{ delay: 2 }}
             >
               <h3 className="text-lg font-semibold text-red-800">Scaling Phase</h3>
-              <ul className="text-red-700 space-y-2">
-                {['Reliability issues', 'Technical debt', 'Performance gaps'].map((item, i) => (
+              <ul className="text-lg text-red-700 space-y-2">
+                {['Reliability issues', 'Disappointment', 'Performance gaps'].map((item, i) => (
                   <motion.li
                     key={i}
                     initial={{ opacity: 0 }}

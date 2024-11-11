@@ -214,7 +214,7 @@ const Slide4: React.FC = () => {
               {challenge.items.map((item, i) => (
                 <motion.li
                   key={i}
-                  className={`flex items-center text-${challenge.color}-800`}
+                  className="flex items-center text-lg"
                   initial={{ x: -10, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.2 + i * 0.1 }}

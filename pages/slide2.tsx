@@ -91,7 +91,7 @@ const Slide2: React.FC = () => {
       {/* Header */}
       <div className="mb-16 text-center">
         <h1 className="text-4xl font-bold text-amber-900 mb-3">Challenges in LLM Dev Cycle</h1>
-        <p className="text-xl text-amber-700 flex items-center justify-center">
+        <p className="text-2xl text-amber-700 flex items-center justify-center">
           <AlertCircle className="w-6 h-6 mr-2" />
           The intersection of immature technology and unrealistic expectations
         </p>
@@ -133,9 +133,9 @@ const Slide2: React.FC = () => {
           <div className="bg-white p-6 rounded-lg shadow-md border-2 border-amber-400">
             <div className="flex items-center mb-4 text-amber-700">
               <Cloud className="w-8 h-8" />
-              <h3 className="text-xl font-semibold ml-3">Inflated Expectations</h3>
+              <h3 className="text-2xl font-semibold ml-3">Inflated Expectations</h3>
             </div>
-            <p className="text-amber-800">
+            <p className="text-lg text-amber-800">
               Unrealistic demands and timeline expectations from stakeholders
             </p>
           </div>

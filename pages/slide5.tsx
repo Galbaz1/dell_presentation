@@ -255,7 +255,7 @@ const Slide5: React.FC = () => {
               {solution.items.map((item, i) => (
                 <motion.li
                   key={i}
-                  className="flex items-center relative"
+                  className="flex items-center relative text-lg"
                   style={{ color: solution.color.text }}
                   initial={{ x: -10, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}

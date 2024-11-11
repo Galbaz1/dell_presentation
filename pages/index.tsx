@@ -23,10 +23,10 @@ const SpeakerSlide: React.FC = () => {
               <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
-              <h2 className="text-xl font-semibold text-amber-900 mb-3 flex items-center">
+              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
                 <CircuitBoard className="mr-3 text-amber-700 w-6 h-6" /> Academic Autodidact
               </h2>
-              <ul className="text-base text-amber-800 flex-1">
+              <ul className="text-lg text-amber-800 flex-1">
                 <li>• Sociology at UVA</li>
                 <li>• Evolutionary Biology</li>
                 <li>• Behavioral Economics</li>
@@ -41,10 +41,10 @@ const SpeakerSlide: React.FC = () => {
               <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
-              <h2 className="text-xl font-semibold text-amber-900 mb-3 flex items-center">
+              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
                 <Building2 className="mr-3 text-amber-700 w-6 h-6" /> Business Leadership
               </h2>
-              <ul className="text-base text-amber-800 flex-1">
+              <ul className="text-lg text-amber-800 flex-1">
                 <li>• Restaurant Owner</li>
                 <li>• Cocktail Bars</li>
                 <li>• Event Company</li>
@@ -59,10 +59,10 @@ const SpeakerSlide: React.FC = () => {
               <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
-              <h2 className="text-xl font-semibold text-amber-900 mb-3 flex items-center">
+              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
                 <Code className="mr-3 text-amber-700 w-6 h-6" /> Tech Innovation
               </h2>
-              <ul className="text-base text-amber-800 flex-1">
+              <ul className="text-lg text-amber-800 flex-1">
                 <li>• Back-end Development</li>
                 <li>• Waitless - QR POS System</li>
                 <li>• Waitler - LLM Chat App</li>
