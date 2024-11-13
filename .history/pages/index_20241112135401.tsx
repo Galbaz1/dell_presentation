@@ -1,0 +1,125 @@
+import React from 'react';
+import { CircuitBoard, Building2, Code, Users, ArrowRight, RefreshCcw } from 'lucide-react';
+import FootstepsAnimation from '../components/FootstepsAnimation';
+import Link from 'next/link';
+
+const SpeakerSlide: React.FC = () => {
+  return (
+    <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-xl shadow-lg min-h-screen overflow-hidden relative">
+      {/* Header */}
+      <div className="mb-24 text-center">
+        <h1 className="text-4xl font-bold text-amber-900 mb-2">Fausto Albers</h1>
+        <p className="text-lg text-amber-700">Path to AI Engineering</p>
+      </div>
+
+      {/* Journey Map */}
+      <div className="relative mb-16 mx-auto max-w-[1400px] mt-[-80px]">
+        <FootstepsAnimation />
+        
+        {/* Journey Stations */}
+        <div className="relative flex justify-between items-center px-16 mt-[160px]">
+          {/* Academic Autodidact */}
+          <div className="w-96 relative fall-animation">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
+              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
+                <CircuitBoard className="mr-3 text-amber-700 w-6 h-6" /> Academic Autodidact
+              </h2>
+              <ul className="text-lg text-amber-800 flex-1">
+                <li>• Sociology at UVA</li>
+                <li>• Evolutionary Biology</li>
+                <li>• Behavioral Economics</li>
+                <li>• Social Psychology</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Business Experience */}
+          <div className="w-96 relative fall-animation fall-animation-delay-1">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
+              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
+                <Building2 className="mr-3 text-amber-700 w-6 h-6" /> Business Leadership
+              </h2>
+              <ul className="text-lg text-amber-800 flex-1">
+                <li>• Restaurant Owner</li>
+                <li>• Cocktail Bars</li>
+                <li>• Event Company</li>
+                <li>• Dark Kitchen</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Tech Innovation */}
+          <div className="w-96 relative fall-animation fall-animation-delay-2">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
+              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
+                <Code className="mr-3 text-amber-700 w-6 h-6" /> Tech Innovation
+              </h2>
+              <ul className="text-lg text-amber-800 flex-1">
+                <li>• Back-end Development</li>
+                <li>• Waitless - QR POS System</li>
+                <li>• Waitler - LLM Chat App</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Current Roles Synergy Circle */}
+      <div className="relative max-w-[1200px] mx-auto mt-24">
+        {/* Synergy Arrows - removed text */}
+        <div className="absolute left-0 right-0 mx-auto w-28 top-[30px] synergy-animation z-10">
+          <div className="relative w-full h-full">
+            <RefreshCcw className="w-full h-full text-amber-600 animate-spin-slow" />
+          </div>
+        </div>
+
+        <div className="flex justify-between items-center synergy-animation px-16">
+          {/* AI Engineering Role */}
+          <div className="w-[480px] relative bg-white p-8 rounded-lg shadow-md border-2 border-amber-400 h-[160px] flex flex-col">
+            <div className="absolute -left-12 top-1/2 transform -translate-y-1/2">
+              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+            </div>
+            <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
+              <CircuitBoard className="mr-3 text-amber-700 w-6 h-6" /> AI Engineering
+            </h2>
+            <p className="text-base text-amber-800">
+              Freelance AI solutions architect combining technical expertise with business acumen
+            </p>
+          </div>
+
+          {/* AI Builders Role */}
+          <div className="w-[480px] relative bg-white p-8 rounded-lg shadow-md border-2 border-amber-400 h-[160px] flex flex-col">
+            <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
+              <Users className="mr-3 text-amber-700 w-6 h-6" /> AI Builders Club
+            </h2>
+            <p className="text-base text-amber-800">
+              Community lead fostering AI innovation in Amsterdam, Rotterdam, and Berlin
+            </p>
+            <div className="absolute -right-12 top-1/2 transform -translate-y-1/2">
+              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Add this navigation at the bottom of the component, before the closing div */}
+      <div className="absolute bottom-8 right-8 flex items-center">
+        <span className="text-amber-800 mr-2">Next</span>
+        <Link href="/slide2" className="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-full transition-colors">
+          <ArrowRight className="w-6 h-6" />
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default SpeakerSlide; 
