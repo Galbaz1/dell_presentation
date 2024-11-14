@@ -10,6 +10,7 @@ const Slide0: React.FC = () => {
   const [showAssistant, setShowAssistant] = useState(false);
   const [assistantResponse, setAssistantResponse] = useState('');
   const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   
   const userCommand = "user: ";
   const userText = "Hi! I am a back-end dev, don't know sh*t about front-end. Help me create 13 slides for my presentation using React 18, Next.js 14, TypeScript, GSAP, Tailwind CSS, and Lucide Icons. See ./instruct.txt for text that I want to present today.";
@@ -19,6 +20,8 @@ const Slide0: React.FC = () => {
 
   // Type user input first
   useEffect(() => {
+    if (isPaused) return; // Don't run the interval if paused
+
     let index = 0;
     const timer = setInterval(() => {
       if (index <= userText.length) {
@@ -34,28 +37,28 @@ const Slide0: React.FC = () => {
     }, 50); // Typing speed for realistic feel
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   // Type assistant response after delay
   useEffect(() => {
-    if (showAssistant) {
-      let index = 0;
-      const timer = setInterval(() => {
-        if (index <= assistantText.length) {
-          setAssistantResponse(assistantText.slice(0, index));
-          index++;
-        } else {
-          clearInterval(timer);
-          // After assistant response is typed, wait 3 seconds before showing final message
-          setTimeout(() => {
-            setShowFinalMessage(true);
-          }, 3000);
-        }
-      }, 50);
+    if (!showAssistant || isPaused) return; // Don't run if paused
 
-      return () => clearInterval(timer);
-    }
-  }, [showAssistant]);
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= assistantText.length) {
+        setAssistantResponse(assistantText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+        // After assistant response is typed, wait 3 seconds before showing final message
+        setTimeout(() => {
+          setShowFinalMessage(true);
+        }, 3000);
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, [showAssistant, isPaused]);
 
   // Add keyboard navigation
   useEffect(() => {
@@ -66,6 +69,10 @@ const Slide0: React.FC = () => {
           break;
         case 'ArrowRight':
           router.push('/');
+          break;
+        case 'p':
+        case 'P':
+          setIsPaused(prev => !prev);
           break;
       }
     };

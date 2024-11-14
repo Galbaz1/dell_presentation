@@ -63,44 +63,52 @@ Answer: {qa.answer}
 """)`;
 
   useEffect(() => {
-    // Timing sequence for highlights
-    setTimeout(() => {
-      setHighlightQuestion(true);
-      setTimeout(() => {
-        setHighlightQuestion(false);
-        setTimeout(() => {
-          setHighlightContext(true);
-          setTimeout(() => {
-            setHighlightContext(false);
-            setTimeout(() => {
-              setHighlightSystem(true);
-              setTimeout(() => {
-                setHighlightSystem(false);
-              }, 3000);
-            }, 500);
-          }, 3000);
-        }, 500);
-      }, 3000);
-    }, 2000);
+    let timeouts: NodeJS.Timeout[] = [];
 
-    // Original scroll animation
+    if (!isPaused) {
+      timeouts.push(setTimeout(() => {
+        setHighlightQuestion(true);
+        timeouts.push(setTimeout(() => {
+          setHighlightQuestion(false);
+          timeouts.push(setTimeout(() => {
+            setHighlightContext(true);
+            timeouts.push(setTimeout(() => {
+              setHighlightContext(false);
+              timeouts.push(setTimeout(() => {
+                setHighlightSystem(true);
+                timeouts.push(setTimeout(() => {
+                  setHighlightSystem(false);
+                }, 3000));
+              }, 500));
+            }, 3000));
+          }, 500));
+        }, 3000));
+      }, 2000));
+    }
+
+    // Clear all timeouts when component unmounts or when isPaused changes
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+    };
+  }, [isPaused]); // Add isPaused as dependency
+
+  useEffect(() => {
     const startScroll = async () => {
-      if (scrollRef.current) {
+      if (scrollRef.current && !isPaused) {
         const scrollHeight = scrollRef.current.scrollHeight;
         const clientHeight = scrollRef.current.clientHeight;
         const scrollDistance = scrollHeight - clientHeight;
 
-        if (!isPaused) {
-          await controls.start({
-            y: scrollDirection > 0 ? -scrollDistance : 0,
-            transition: {
-              duration: 30,
-              ease: "linear",
-            }
-          });
-        } else {
-          controls.stop();
-        }
+        await controls.start({
+          y: scrollDirection > 0 ? -scrollDistance : 0,
+          transition: {
+            duration: 30,
+            ease: "linear",
+          }
+        });
+      } else {
+        // If paused, stop the animation where it is
+        controls.stop();
       }
     };
 

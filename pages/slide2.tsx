@@ -8,21 +8,45 @@ const Slide2: React.FC = () => {
   const router = useRouter();
   
   const [animationPhase, setAnimationPhase] = useState<'falling' | 'hitting' | 'growing' | 'pulsing'>('falling');
+  const [showAbstraction, setShowAbstraction] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    let timeouts: NodeJS.Timeout[] = [];
+    
     const sequence = async () => {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setAnimationPhase('hitting');
+      if (isPaused) return;
+
+      setAnimationPhase('falling');
+      setShowAbstraction(false);
+
+      timeouts.push(setTimeout(() => {
+        if (!isPaused) setAnimationPhase('falling');
+      }, 10000));
       
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setAnimationPhase('growing');
+      timeouts.push(setTimeout(() => {
+        if (!isPaused) setAnimationPhase('hitting');
+      }, 12000));
       
-      await new Promise(resolve => setTimeout(resolve, 15000));
-      setAnimationPhase('pulsing');
+      timeouts.push(setTimeout(() => {
+        if (!isPaused) setAnimationPhase('growing');
+      }, 13000));
+      
+      timeouts.push(setTimeout(() => {
+        if (!isPaused) setAnimationPhase('pulsing');
+      }, 28000));
+      
+      timeouts.push(setTimeout(() => {
+        if (!isPaused) setShowAbstraction(true);
+      }, 31000));
     };
     
     sequence();
-  }, []);
+
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+    };
+  }, [isPaused]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -33,6 +57,9 @@ const Slide2: React.FC = () => {
         case 'ArrowRight':
           router.push('/slide3');
           break;
+        case 'p':
+          setIsPaused(prev => !prev);
+          break;
       }
     };
 
@@ -41,8 +68,12 @@ const Slide2: React.FC = () => {
   }, [router]);
 
   const blockVariants = {
-    falling: { 
+    initial: {
       y: "-200vh",
+      x: "-50%",
+    },
+    falling: { 
+      y: isPaused ? "auto" : "-200vh",
       x: "-50%",
       transition: {
         y: { 
@@ -77,13 +108,10 @@ const Slide2: React.FC = () => {
     pulsing: {
       y: "50%",
       x: "-50%",
-      scale: [2, 2.1, 2],
+      scale: 2,
+      opacity: 0,
       transition: {
-        scale: {
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }
+        opacity: { duration: 0.3 }
       }
     }
   };
@@ -101,6 +129,25 @@ const Slide2: React.FC = () => {
         stiffness: 60,
         damping: 20,
         restDelta: 0.001
+      }
+    }
+  };
+
+  const abstractionVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      y: "50%",
+      x: "-50%",
+    },
+    visible: {
+      opacity: 1,
+      scale: 2,
+      y: "50%",
+      x: "-50%",
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
       }
     }
   };
@@ -142,22 +189,46 @@ const Slide2: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Falling Block - Changed to Circle */}
-        <motion.div 
-          className="absolute left-1/2 -translate-x-1/2 top-0 w-[300px] z-20"
-          variants={blockVariants}
-          initial="falling"
-          animate={animationPhase}
-        >
-          <div className="bg-white p-6 rounded-full shadow-md border-2 border-amber-400">
-            <h3 className="text-2xl font-semibold text-amber-700 text-center mb-4">
-              Inflated Expectations
-            </h3>
-            <p className="text-lg text-amber-800 text-center">
-              Unrealistic expectations from development teams and stakeholders
-            </p>
-          </div>
-        </motion.div>
+        {/* Falling Block */}
+        <AnimatePresence>
+          {!showAbstraction && (
+            <motion.div 
+              className="absolute left-1/2 -translate-x-1/2 top-0 w-[300px] z-20"
+              variants={blockVariants}
+              initial="initial"
+              animate={animationPhase}
+              exit={{ opacity: 0 }}
+            >
+              <div className="bg-white p-6 rounded-full shadow-md border-2 border-amber-400">
+                <h3 className="text-2xl font-semibold text-amber-700 text-center mb-4">
+                  Inflated Expectations
+                </h3>
+                <p className="text-lg text-amber-800 text-center">
+                  Unrealistic expectations from development teams and stakeholders
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Abstraction SVG */}
+        <AnimatePresence>
+          {showAbstraction && (
+            <motion.div 
+              className="absolute left-1/2 top-0 w-[300px] z-20"
+              variants={abstractionVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <img 
+                src="/abstraction.svg" 
+                alt="Abstraction Layers"
+                className="w-full h-auto"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Navigation */}

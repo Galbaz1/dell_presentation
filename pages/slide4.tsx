@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ArrowRight, ArrowLeft, Bug, Zap, Eye, AlertTriangle, DollarSign, Bomb, Gauge, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Bug, Zap, Eye, AlertTriangle, Euro, Bomb, Gauge, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -44,7 +44,7 @@ const Slide4: React.FC = () => {
       }
     },
     {
-      icon: <DollarSign className="w-12 h-12" />,
+      icon: <Euro className="w-12 h-12" />,
       title: "Costs",
       color: "amber",
       items: [
@@ -62,12 +62,12 @@ const Slide4: React.FC = () => {
     },
     {
       icon: <Eye className="w-12 h-12" />,
-      title: "Observability",
+      title: "Inflated Expectations",
       color: "blue",
       items: [
-        "Monitoring and Diagnostics",
-        "Complexity in Benchmarking",
-        "Tooling and Integration"
+        "From developers",
+        "From Stakeholders",
+        "Solutions"
       ],
       animation: {
         hover: { 

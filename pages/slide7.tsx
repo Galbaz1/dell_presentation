@@ -79,16 +79,6 @@ const Slide7: React.FC = () => {
 
   const blocks = [
     {
-      icon: <TreePine className="w-8 h-8" />,
-      title: "Tree of Thought",
-      description: "Multiple reasoning paths exploration",
-      color: {
-        bg: "#f0fdf4",
-        border: "#10b981",
-        text: "#065f46"
-      }
-    },
-    {
       icon: <Link2 className="w-8 h-8" />,
       title: "Chain of Thought",
       description: "Step-by-step reasoning process",
@@ -96,6 +86,16 @@ const Slide7: React.FC = () => {
         bg: "#fff7ed",
         border: "#f59e0b",
         text: "#78350f"
+      }
+    },
+    {
+      icon: <TreePine className="w-8 h-8" />,
+      title: "Tree of Thought",
+      description: "Multiple reasoning paths exploration",
+      color: {
+        bg: "#f0fdf4",
+        border: "#10b981",
+        text: "#065f46"
       }
     },
     {

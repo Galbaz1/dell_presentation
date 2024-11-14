@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 const Slide3: React.FC = () => {
   const router = useRouter();
-  const [hoveredBlock, setHoveredBlock] = useState<'dev' | 'stakeholder' | null>(null);
+  const [animationStarted, setAnimationStarted] = useState(false);
 
   // Floating particles for background effect
   const particles = Array.from({ length: 15 }).map((_, i) => ({
@@ -70,6 +70,14 @@ const Slide3: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [router]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimationStarted(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-xl shadow-lg min-h-screen overflow-hidden relative">
       {/* Floating Particles */}
@@ -117,21 +125,18 @@ const Slide3: React.FC = () => {
         <div className="flex justify-between items-start gap-8">
           {/* Developer Side */}
           <motion.div
-            className="w-[35%] p-6 bg-white rounded-lg shadow-lg border-2 border-amber-400 cursor-pointer"
+            className="w-[35%] p-6 bg-white rounded-lg shadow-lg border-2 border-amber-400"
             variants={blockVariants}
             custom={true}
             initial="initial"
             animate="animate"
-            whileHover="hover"
-            onHoverStart={() => setHoveredBlock('dev')}
-            onHoverEnd={() => setHoveredBlock(null)}
           >
             <motion.div 
               className="w-20 h-20 rounded-full bg-amber-100 flex items-center justify-center mb-4 mx-auto"
               animate={{ 
-                rotate: hoveredBlock === 'dev' ? [0, 360] : 0
+                rotate: animationStarted ? [0, 360] : 0
               }}
-              transition={{ duration: 2 }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
               <Zap className="w-12 h-12 text-amber-600" />
             </motion.div>
@@ -154,21 +159,18 @@ const Slide3: React.FC = () => {
 
           {/* Stakeholder Side */}
           <motion.div
-            className="w-[35%] p-6 bg-white rounded-lg shadow-lg border-2 border-amber-400 cursor-pointer"
+            className="w-[35%] p-6 bg-white rounded-lg shadow-lg border-2 border-amber-400"
             variants={blockVariants}
             custom={false}
             initial="initial"
             animate="animate"
-            whileHover="hover"
-            onHoverStart={() => setHoveredBlock('stakeholder')}
-            onHoverEnd={() => setHoveredBlock(null)}
           >
             <motion.div 
               className="w-20 h-20 rounded-full bg-amber-100 flex items-center justify-center mb-4 mx-auto"
               animate={{ 
-                rotate: hoveredBlock === 'stakeholder' ? [0, 360] : 0
+                rotate: animationStarted ? [0, 360] : 0
               }}
-              transition={{ duration: 2 }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
               <Brain className="w-12 h-12 text-amber-600" />
             </motion.div>
