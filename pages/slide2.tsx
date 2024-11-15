@@ -52,7 +52,7 @@ const Slide2: React.FC = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
         case 'ArrowLeft':
-          router.push('/');
+          router.push('/slide1');
           break;
         case 'ArrowRight':
           router.push('/slide3');
@@ -233,7 +233,7 @@ const Slide2: React.FC = () => {
 
       {/* Navigation */}
       <div className="absolute bottom-8 right-8 flex items-center space-x-4">
-        <Link href="/" className="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-full transition-colors">
+        <Link href="/slide1" className="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-full transition-colors">
           <ArrowLeft className="w-6 h-6" />
         </Link>
         <Link href="/slide3" className="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-full transition-colors">

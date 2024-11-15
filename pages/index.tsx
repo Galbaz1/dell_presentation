@@ -1,20 +1,71 @@
-import React, { useEffect } from 'react';
-import { CircuitBoard, Building2, Code, Users, ArrowRight, RefreshCcw, ArrowLeft } from 'lucide-react';
-import FootstepsAnimation from '../components/FootstepsAnimation';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Terminal } from 'lucide-react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 
-const SpeakerSlide: React.FC = () => {
+const slide1: React.FC = () => {
   const router = useRouter();
+  const [userInput, setUserInput] = useState('');
+  const [showAssistant, setShowAssistant] = useState(false);
+  const [assistantResponse, setAssistantResponse] = useState('');
+  const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   
+  const userCommand = "user: ";
+  const userText = "Hi! I am a back-end dev, don't know sh*t about front-end. Help me create 13 slides for my presentation using React 18, Next.js 14, TypeScript, GSAP, Tailwind CSS, and Lucide Icons. See ./instruct.txt for text that I want to present today.";
+  const assistantCommand = "assistant: ";
+  const assistantText = "Sure! I'll be happy to help! Give me a sec.";
+  const finalMessage = "\n\nYour slides are now ready. Good luck with your presentation Fausto!";
+
+  // Type user input first
+  useEffect(() => {
+    if (isPaused) return; // Don't run the interval if paused
+
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= userText.length) {
+        setUserInput(userText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+        // After user input is typed, wait 3 seconds before showing assistant response
+        setTimeout(() => {
+          setShowAssistant(true);
+        }, 3000);
+      }
+    }, 50); // Typing speed for realistic feel
+
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Type assistant response after delay
+  useEffect(() => {
+    if (!showAssistant || isPaused) return; // Don't run if paused
+
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= assistantText.length) {
+        setAssistantResponse(assistantText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+        // After assistant response is typed, wait 3 seconds before showing final message
+        setTimeout(() => {
+          setShowFinalMessage(true);
+        }, 3000);
+      }
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, [showAssistant, isPaused]);
+
+  // Update the keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
-        case 'ArrowLeft':
-          router.push('/slide0');  // Go to slide0
-          break;
         case 'ArrowRight':
-          router.push('/slide2');  // Go to slide2
+          router.push('/slide1');  // Change from '/slide1' to '/slide1'
           break;
       }
     };
@@ -24,118 +75,77 @@ const SpeakerSlide: React.FC = () => {
   }, [router]);
 
   return (
-    <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-xl shadow-lg min-h-screen overflow-hidden relative">
-      {/* Header */}
-      <div className="mb-24 text-center">
-        <h1 className="text-4xl font-bold text-amber-900 mb-2">Fausto Albers</h1>
-        <p className="text-lg text-amber-700">Path to AI Engineering</p>
-      </div>
-
-      {/* Journey Map */}
-      <div className="relative mb-16 mx-auto max-w-[1400px]">
-        <FootstepsAnimation />
-        {/* Journey Stations */}
-        <div className="relative flex justify-between items-center px-16">
-          {/* Academic Autodidact */}
-          <div className="w-96 relative fall-animation">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+    <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-xl shadow-lg min-h-screen overflow-hidden relative">
+      {/* Terminal Container */}
+      <motion.div
+        className="max-w-5xl mx-auto mt-16"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <div className="relative">
+          {/* Terminal Header */}
+          <div className="bg-gray-800 rounded-t-lg p-3 flex items-center">
+            <div className="flex space-x-2 absolute left-4">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
-              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
-                <CircuitBoard className="mr-3 text-amber-700 w-6 h-6" /> Academic Autodidact
-              </h2>
-              <ul className="text-lg text-amber-800 flex-1">
-                <li>• Sociology at UVA</li>
-                <li>• Evolutionary Biology</li>
-                <li>• Behavioral Economics</li>
-                <li>• Social Psychology</li>
-              </ul>
+            <div className="mx-auto flex items-center">
+              <Terminal className="w-5 h-5 text-gray-400 mr-2" />
+              <span className="text-gray-400 font-mono text-xl">Terminal</span>
             </div>
           </div>
-
-          {/* Business Experience */}
-          <div className="w-96 relative fall-animation fall-animation-delay-1">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
+          
+          {/* Terminal Content */}
+          <div className="bg-gray-900 p-6 rounded-b-lg min-h-[60vh] font-mono">
+            <div className="text-green-400 text-2xl whitespace-pre-wrap">
+              <span className="text-green-400">{userCommand}</span>
+              {userInput}
+              {userInput.length === userText.length && !showAssistant && (
+                <motion.span
+                  className="inline-block w-3 h-6 bg-green-400 ml-1"
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.5, repeat: Infinity }}
+                />
+              )}
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
-              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
-                <Building2 className="mr-3 text-amber-700 w-6 h-6" /> Business Leadership
-              </h2>
-              <ul className="text-lg text-amber-800 flex-1">
-                <li>• Restaurant Owner</li>
-                <li>• Cocktail Bars</li>
-                <li>• Event Company</li>
-                <li>• Dark Kitchen</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Tech Innovation */}
-          <div className="w-96 relative fall-animation fall-animation-delay-2">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md mt-8 h-[200px] flex flex-col border-2 border-emerald-400">
-              <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
-                <Code className="mr-3 text-amber-700 w-6 h-6" /> Tech Innovation
-              </h2>
-              <ul className="text-lg text-amber-800 flex-1">
-                <li>• Back-end Development</li>
-                <li>• Waitless - QR POS System</li>
-                <li>• Waitler - LLM Chat App</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Current Roles Synergy Circle */}
-      <div className="relative max-w-[1200px] mx-auto mt-24">
-        {/* Synergy Arrows - removed text */}
-        <div className="absolute left-0 right-0 mx-auto w-28 top-[30px] synergy-animation z-10">
-          <div className="relative w-full h-full">
-            <RefreshCcw className="w-full h-full text-amber-600 animate-spin-slow" />
+            
+            <AnimatePresence>
+              {showAssistant && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-blue-400 text-2xl whitespace-pre-wrap mt-4"
+                >
+                  <span className="text-blue-400">{assistantCommand}</span>
+                  {assistantResponse}
+                  {assistantResponse.length === assistantText.length && !showFinalMessage && (
+                    <motion.span
+                      className="inline-block w-3 h-6 bg-blue-400 ml-1"
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.5, repeat: Infinity }}
+                    />
+                  )}
+                </motion.div>
+              )}
+              {showFinalMessage && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-blue-400 text-2xl whitespace-pre-wrap mt-4"
+                >
+                  {finalMessage}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
+      </motion.div>
 
-        <div className="flex justify-between items-center synergy-animation px-16">
-          {/* AI Engineering Role */}
-          <div className="w-[480px] relative bg-white p-8 rounded-lg shadow-md border-2 border-amber-400 h-[160px] flex flex-col">
-            <div className="absolute -left-12 top-1/2 transform -translate-y-1/2">
-              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
-            </div>
-            <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
-              <CircuitBoard className="mr-3 text-amber-700 w-6 h-6" /> AI Engineering
-            </h2>
-            <p className="text-base text-amber-800">
-              Freelance AI solutions architect combining technical expertise with business acumen
-            </p>
-          </div>
-
-          {/* AI Builders Role */}
-          <div className="w-[480px] relative bg-white p-8 rounded-lg shadow-md border-2 border-amber-400 h-[160px] flex flex-col">
-            <h2 className="text-2xl font-semibold text-amber-900 mb-3 flex items-center">
-              <Users className="mr-3 text-amber-700 w-6 h-6" /> AI Builders Club
-            </h2>
-            <p className="text-base text-amber-800">
-              Community lead fostering AI innovation in Amsterdam, Rotterdam, and Berlin
-            </p>
-            <div className="absolute -right-12 top-1/2 transform -translate-y-1/2">
-              <div className="w-8 h-8 rounded-full bg-amber-400 border-4 border-amber-600" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Modified Navigation - Added back button */}
+      {/* Navigation */}
       <div className="absolute bottom-8 right-8 flex items-center space-x-4">
-        <Link href="/slide0" className="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-full transition-colors">
-          <ArrowLeft className="w-6 h-6" />
-        </Link>
-        <span className="text-amber-800 mr-2">Next</span>
-        <Link href="/slide2" className="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-full transition-colors">
+        <Link href="/slide1" className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-full transition-colors">
           <ArrowRight className="w-6 h-6" />
         </Link>
       </div>
@@ -143,4 +153,4 @@ const SpeakerSlide: React.FC = () => {
   );
 };
 
-export default SpeakerSlide; 
+export default slide1;

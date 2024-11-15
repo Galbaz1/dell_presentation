@@ -25,10 +25,20 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/slide13": [
+    "/slide1": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/slide13.js"
+      "static/chunks/pages/slide1.js"
+    ],
+    "/slide2": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/slide2.js"
+    ],
+    "/slide3": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/slide3.js"
     ],
     "/slide4": [
       "static/chunks/webpack.js",

@@ -2,7 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/slide4": "pages/slide4.js",
   "/": "pages/index.js",
-  "/slide13": "pages/slide13.js"
+  "/slide1": "pages/slide1.js",
+  "/slide4": "pages/slide4.js",
+  "/slide3": "pages/slide3.js",
+  "/slide2": "pages/slide2.js"
 }
